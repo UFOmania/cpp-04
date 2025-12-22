@@ -1,6 +1,8 @@
 src= main.cpp Animal.cpp Dog.cpp Cat.cpp Brain.cpp
 obj = $(src:.cpp=.o)
-flags = -Wall -Wextra -Werror -std=c++98  -fsanitize=address -g3
+flags = -Wall -Wextra -Werror -MMD -std=c++98
+deps = $(src:.cpp=.d)
+
 NAME= Animal
 
 all: $(NAME)
@@ -8,7 +10,7 @@ all: $(NAME)
 $(NAME): $(obj)
 	c++ $(flags) $(obj) -o $@
 
-%.o: %.cpp Animal.hpp Dog.hpp Cat.hpp Brain.hpp
+%.o: %.cpp
 	c++ $(flags) -o $@ -c $<
 
 clean:
@@ -18,3 +20,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+-include $(deps)

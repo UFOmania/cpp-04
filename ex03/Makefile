@@ -1,6 +1,7 @@
 src= AMateria.cpp Character.cpp Cure.cpp Ice.cpp MateriaSource.cpp main.cpp
 obj = $(src:.cpp=.o)
-flags = -Wall -Wextra -Werror -std=c++98  #-fsanitize=address -g3
+flags = -Wall -Wextra -Werror -MMD -std=c++98
+deps = $(src:.cpp=.d)
 NAME= app
 
 all: $(NAME)
@@ -8,7 +9,7 @@ all: $(NAME)
 $(NAME): $(obj)
 	c++ $(flags) $(obj) -o $@
 
-%.o: %.cpp AMateria.hpp Character.hpp Cure.hpp ICharacter.hpp IMateriaSource.hpp Ice.hpp MateriaSource.hpp
+%.o: %.cpp
 	c++ $(flags) -o $@ -c $<
 
 clean:
@@ -18,3 +19,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+-include $(deps)
