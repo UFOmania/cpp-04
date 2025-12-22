@@ -1,24 +1,26 @@
 #include "Dog.hpp"
+#include "Brain.hpp"
+#include <iostream>
 
 Dog::~Dog()
 {
-    delete brain;
     std::cout << "Dog got Destroyed" << std::endl;
+    delete brain;
 }
 Dog::Dog() : Animal("Dog") 
 {
-    brain = new Brain();
     std::cout << "Default Dog is Constrtucted" << std::endl;
+    brain = new Brain();
 }
-Dog::Dog(const Dog &other)
+Dog::Dog(const Dog &other) : Animal(other)
 {
-    *this = other;
     std::cout << "Copy Dog is Constrtucted" << std::endl;
+    *this = other;
 }
 
 Dog &Dog::operator=(const Dog &other)
 {
-    type = other.type;
+    Animal::operator=(other);
     delete brain;
     brain = new Brain(*other.brain);
     return *this;

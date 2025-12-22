@@ -1,4 +1,6 @@
 #include "Cure.hpp"
+#include <iostream>
+#include "ICharacter.hpp"
 
 
 Cure::~Cure()

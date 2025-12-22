@@ -1,6 +1,7 @@
 src= main.cpp Animal.cpp Dog.cpp Cat.cpp
 obj = $(src:.cpp=.o)
-flags = -Wall -Wextra -Werror -std=c++98
+flags = -Wall -Wextra -Werror -MMD -std=c++98
+deps = $(src:.cpp=.d)
 NAME= Animal
 
 all: $(NAME)
@@ -8,13 +9,15 @@ all: $(NAME)
 $(NAME): $(obj)
 	c++ $(flags) $(obj) -o $@
 
-%.o: %.cpp Animal.hpp Dog.hpp Cat.hpp
+%.o: %.cpp 
 	c++ $(flags) -o $@ -c $<
 
 clean:
-	rm -f $(obj)
+	rm -f $(obj) $(deps)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+-include $(deps)

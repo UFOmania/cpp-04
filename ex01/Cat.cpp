@@ -1,24 +1,26 @@
 #include "Cat.hpp"
+#include "Brain.hpp"
+#include <iostream>
 
 Cat::~Cat()
 {
-    delete brain;
     std::cout << "Cat got Destroyed" << std::endl;
+    delete brain;
 }
 Cat::Cat() : Animal("Cat")
 {
-    brain = new Brain();
     std::cout << "Default Cat is Constrtucted" << std::endl;
+    brain = new Brain();
 }
-Cat::Cat(const Cat &other)
+Cat::Cat(const Cat &other) : Animal(other)
 {
-    *this = other;
     std::cout << "Copy Cat is Constrtucted" << std::endl;
+    *this = other;
 }
 
 Cat &Cat::operator=(const Cat &other)
 {
-    type = other.type;
+    Animal::operator=(other);
     delete brain;
     brain = new Brain(*other.brain);
     return *this;

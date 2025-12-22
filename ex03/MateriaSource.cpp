@@ -1,5 +1,5 @@
 #include "MateriaSource.hpp"
-
+#include "AMateria.hpp"
 
 
 MateriaSource::~MateriaSource()
@@ -32,7 +32,6 @@ void MateriaSource::learnMateria(AMateria *m)
         if (_materias[i] == NULL)
         {
             _materias[i] = m;
-            // std::cout << "m learned index " << i << std::endl;
             return;
         }
     }

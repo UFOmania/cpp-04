@@ -1,4 +1,5 @@
 #include "Cat.hpp"
+#include <iostream>
 
 Cat::~Cat()
 {
@@ -8,15 +9,16 @@ Cat::Cat() : Animal("Cat")
 {
     std::cout << "Default Cat is Constrtucted" << std::endl;
 }
-Cat::Cat(const Cat &other)
+Cat::Cat(const Cat &other) : Animal(other)
 {
-    *this = other;
     std::cout << "Copy Cat is Constrtucted" << std::endl;
 }
 
 Cat &Cat::operator=(const Cat &other)
 {
-    type = other.type;
+	if (this == &other)
+		return *this;
+    Animal::operator=(other);
     return *this;
 }
 

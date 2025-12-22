@@ -1,37 +1,40 @@
 #include "Animal.hpp"
+#include <iostream>
 
 Animal::~Animal()
 {
-    std::cout << "animal " << type << " got Destroyed" << std::endl;
+    std::cout << "Animal " << type << " got Destroyed" << std::endl;
 }
-Animal::Animal()
+
+Animal::Animal() : type("Default")
 {
-    type = "Creeper";
     std::cout << "Default animal is Constrtucted" << std::endl;
 }
-Animal::Animal(const std::string &type)
+
+Animal::Animal(const std::string &type) : type(type)
 {
-    this->type = type;
-    std::cout << "animal type " << type <<  " is Constrtucted" << std::endl;
+    std::cout << "Animal type " << type <<  " is Constrtucted" << std::endl;
 }
-Animal::Animal(const Animal &other)
+
+Animal::Animal(const Animal &other) : type(other.type)
 {
-    *this = other;
     std::cout << "Copy animal is Constrtucted" << std::endl;
 }
 
 Animal &Animal::operator=(const Animal &other)
 {
+	if (this == &other)
+		return *this;
     type = other.type;
     return *this;
 }
 
-std::string Animal::getType() const
-{
-    return type;
-}
-
 void Animal::makeSound() const
 {
-    std::cout<<"booom!!!\n";
+    std::cout<<"animal sound!!!\n";
+}
+
+std::string Animal::getType() const
+{
+	return type;
 }

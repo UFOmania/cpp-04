@@ -1,6 +1,6 @@
 src= main.cpp Animal.cpp Dog.cpp Cat.cpp Brain.cpp
 obj = $(src:.cpp=.o)
-flags = -Wall -Wextra -Werror -std=c++98  #-fsanitize=address -g3
+flags = -Wall -Wextra -Werror -std=c++98  -fsanitize=address -g3
 NAME= Animal
 
 all: $(NAME)

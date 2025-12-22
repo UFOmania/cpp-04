@@ -1,11 +1,12 @@
 #include "Character.hpp"
+#include "AMateria.hpp"
 
 Character::~Character()
 {
     for(int i = 0; i < 4; i++)
         delete _materias[i];
-    for(int i = 0; i < 512; i++)
-        delete _floor[i];
+    for(std::vector<AMateria *>::iterator it = _floor.begin(); it != _floor.end(); ++it)
+		delete *it;
     
 }
 
@@ -13,17 +14,12 @@ Character::Character()
 {
     for(int i = 0; i < 4; i++)
         _materias[i] = NULL;
-    for(int i = 0; i < 512; i++)
-        _floor[i] = NULL;
-    
     _name = "Default";
 }
 Character::Character(const std::string & name)
 {
     for(int i = 0; i < 4; i++)
         _materias[i] = NULL;
-    for(int i = 0; i < 512; i++)
-        _floor[i] = NULL;
     _name = name;
 }
 Character::Character(const Character & other)
@@ -32,18 +28,27 @@ Character::Character(const Character & other)
 }
 Character &Character::operator=(const Character & other)
 {
+	if (this == &other)
+		return *this;
+
     for(int i = 0; i < 4; i++)
     {
         delete _materias[i];
         _materias[i] = other._materias[i]->clone();
     }
-    for(int i = 0; i < 4; i++)
-    {
-        delete _floor[i];
-        _floor[i] = other._floor[i]->clone();
-    }
+
+	//clear the old floor
+    for(std::vector<AMateria *>::iterator it = _floor.begin(); it != _floor.end(); ++it)
+    	{ delete *it; }
+	_floor.clear();
+
+	//set a new one
+	for(std::vector<AMateria*>::const_iterator it = other._floor.begin(); it != other._floor.end(); ++it)
+    { _floor.push_back((*it)->clone()); }
+
     _name = other._name;
-    return *this;
+    
+	return *this;
 }
 
 
@@ -51,6 +56,7 @@ void Character::equip(AMateria* m)
 {
     if (!m)
         return;
+
     for(int i = 0; i < 4; i++)
     {
         if (_materias[i] == m)
@@ -69,24 +75,21 @@ void Character::equip(AMateria* m)
 
 void Character::unequip(int idx)
 {
-    if (idx < 0 || idx > 3)
-        return ;
-    for(int i = 0; i < 512; i++)
-    {
-        if(_floor[i] == NULL)
-        {
-            _floor[i] = _materias[idx];
-            _materias[idx] = NULL;
-        }
-    }
+    if (idx < 0 || idx > 3 || _materias[idx] == NULL)
+		{ return ;}
+
+	_floor.push_back(_materias[idx]);
+	_materias[idx] = NULL;
+
 }
 
 void Character::use(int idx, ICharacter & target)
 {
-    if (_materias[idx])
-    {
-        _materias[idx]->use(target);
-    }
+	if (idx < 0 || idx > 3 || _materias[idx] == NULL)
+       { return ;}
+    
+    _materias[idx]->use(target);
+    
 }
 
 std::string const & Character::getName() const

@@ -1,5 +1,6 @@
+#include <iostream>
 #include "AMateria.hpp"
-
+#include "ICharacter.hpp"
 
 AMateria::~AMateria(){}
 AMateria::AMateria(){}
@@ -11,13 +12,19 @@ AMateria & AMateria::operator=(const AMateria & other)
     return *this;
 }
 
-std::string const & AMateria::getType() const
+const std::string &AMateria::getType() const
 {
     return _type;
 }
 
-AMateria* AMateria::clone() const{return NULL;}
-void AMateria::use(ICharacter& target){std::cout << target.getName() << "\n";};
+AMateria* AMateria::clone() const
+{
+	return NULL;
+}
+void AMateria::use(ICharacter& target)
+{
+	std::cout << target.getName() << "\n";
+}
 
 
 

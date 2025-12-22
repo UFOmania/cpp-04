@@ -1,14 +1,14 @@
 #include "Dog.hpp"
 #include "Cat.hpp"
 
-void foo()
-{
-    system("leaks Animal");
-}
+// void foo()
+// {
+//     system("leaks Animal");
+// }
 
 int main()
 {
-    atexit(foo);
+    // atexit(foo);
     Animal *animals[10];
     for(int i = 0; i < 10; i++)
     {
@@ -19,11 +19,23 @@ int main()
     }
     
     for(int i = 0; i < 10; i++)
-        delete animals[i];
+	{
 
-    // Animal *a = new Dog();
-    // Animal c(*a);
+		delete animals[i];
+	}
 
-    // delete a;
-    return 0;
+
+	Cat c;
+	std::cout << std::endl;
+	Cat b;
+	std::cout << std::endl;
+	b = c;
+	std::cout << std::endl;
+	// {
+	// 	Cat c;
+	// 	b = c;
+	// }
+	
+
+	return 0;
 }

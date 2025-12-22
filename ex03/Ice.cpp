@@ -1,5 +1,6 @@
+#include <iostream>
 #include "Ice.hpp"
-
+#include "ICharacter.hpp"
 
 Ice::~Ice()
 {}

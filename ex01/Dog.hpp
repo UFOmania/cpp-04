@@ -2,11 +2,12 @@
 #define DOG_HPP
 
 #include "Animal.hpp"
+class Brain;
 
 class Dog : public Animal
 {
     private:
-        Brain   *brain;
+        Brain	*brain;
     public:
         ~Dog();
         Dog();

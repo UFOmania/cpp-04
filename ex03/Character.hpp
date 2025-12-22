@@ -2,13 +2,14 @@
 #define CHARACTER_HPP
 
 #include "ICharacter.hpp"
+#include <vector>
 
 class Character : public ICharacter
 {
     private:
         AMateria    *_materias[4];
         std::string _name;
-        AMateria    *_floor[512];
+		std::vector<AMateria *> _floor;
 
     public:
         ~Character();
