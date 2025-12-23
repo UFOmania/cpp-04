@@ -1,4 +1,4 @@
-src= main.cpp Animal.cpp Dog.cpp Cat.cpp
+src= main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
 obj = $(src:.cpp=.o)
 flags = -Wall -Wextra -Werror -MMD -std=c++98
 deps = $(src:.cpp=.d)
