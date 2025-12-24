@@ -3,23 +3,35 @@
 
 Character::~Character()
 {
-    for(int i = 0; i < 4; i++)
+	for(int i = 0; i < 4; i++)
         delete _materias[i];
-    for(std::vector<AMateria *>::iterator it = _floor.begin(); it != _floor.end(); ++it)
-		delete *it;
-    
+
+    while (_floor)
+	{
+		t_node *n = _floor;
+
+		_floor = _floor->next;
+		delete n->m;
+		delete n;
+	}
 }
 
 Character::Character()
 {
     for(int i = 0; i < 4; i++)
+	{
         _materias[i] = NULL;
+	}
+	_floor = NULL;
     _name = "Default";
 }
 Character::Character(const std::string & name)
 {
     for(int i = 0; i < 4; i++)
+	{
         _materias[i] = NULL;
+	}
+	_floor = NULL;
     _name = name;
 }
 Character::Character(const Character & other)
@@ -36,15 +48,19 @@ Character &Character::operator=(const Character & other)
         delete _materias[i];
         _materias[i] = other._materias[i]->clone();
     }
-
-	//clear the old floor
-    for(std::vector<AMateria *>::iterator it = _floor.begin(); it != _floor.end(); ++it)
-    	{ delete *it; }
-	_floor.clear();
-
-	//set a new one
-	for(std::vector<AMateria*>::const_iterator it = other._floor.begin(); it != other._floor.end(); ++it)
-    { _floor.push_back((*it)->clone()); }
+	
+	//clear this floor
+	if (_floor)
+	{
+		while (_floor)
+		{
+			t_node *n = _floor;
+			_floor = _floor->next;
+			delete n->m;
+			delete n;
+		}
+		_floor = NULL;
+	}
 
     _name = other._name;
     
@@ -78,9 +94,20 @@ void Character::unequip(int idx)
     if (idx < 0 || idx > 3 || _materias[idx] == NULL)
 		{ return ;}
 
-	_floor.push_back(_materias[idx]);
+	if (_floor == NULL)
+	{
+		_floor = new t_node;
+		_floor->m = _materias[idx];
+	}
+	else
+	{
+		t_node *tmp = _floor;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new t_node;
+		tmp->next->m = _materias[idx];
+	}
 	_materias[idx] = NULL;
-
 }
 
 void Character::use(int idx, ICharacter & target)

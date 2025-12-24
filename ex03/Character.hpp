@@ -2,14 +2,20 @@
 #define CHARACTER_HPP
 
 #include "ICharacter.hpp"
-#include <vector>
+
+typedef struct s_node
+{
+	AMateria	*m;
+	struct s_node	*next;
+} t_node;
+
 
 class Character : public ICharacter
 {
     private:
         AMateria    *_materias[4];
         std::string _name;
-		std::vector<AMateria *> _floor;
+		t_node *_floor;
 
     public:
         ~Character();
