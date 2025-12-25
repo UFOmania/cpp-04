@@ -1,19 +1,22 @@
 #include "Character.hpp"
 #include "AMateria.hpp"
+#include <iostream>
 
 Character::~Character()
 {
 	for(int i = 0; i < 4; i++)
         delete _materias[i];
-
+	int i = 0;
     while (_floor)
 	{
+		i++;
 		t_node *n = _floor;
 
 		_floor = _floor->next;
 		delete n->m;
 		delete n;
 	}
+	std::cout << i << std::endl;
 }
 
 Character::Character()
@@ -29,13 +32,18 @@ Character::Character(const std::string & name)
 {
     for(int i = 0; i < 4; i++)
 	{
-        _materias[i] = NULL;
+        _materias[i] = 0;
 	}
 	_floor = NULL;
     _name = name;
 }
 Character::Character(const Character & other)
 {
+	for(int i = 0; i < 4; i++)
+	{
+		_materias[i] = 0;
+	}
+	_floor = NULL;
     *this = other;
 }
 Character &Character::operator=(const Character & other)
@@ -45,8 +53,13 @@ Character &Character::operator=(const Character & other)
 
     for(int i = 0; i < 4; i++)
     {
-        delete _materias[i];
-        _materias[i] = other._materias[i]->clone();
+		std::cout << _materias[i] << std::endl;
+		if (_materias[i])
+		{
+       		delete _materias[i];
+		}
+		if (other._materias[i])
+        	_materias[i] = other._materias[i]->clone();
     }
 	
 	//clear this floor
@@ -98,6 +111,7 @@ void Character::unequip(int idx)
 	{
 		_floor = new t_node;
 		_floor->m = _materias[idx];
+		_floor->next = NULL;
 	}
 	else
 	{
@@ -106,6 +120,7 @@ void Character::unequip(int idx)
 			tmp = tmp->next;
 		tmp->next = new t_node;
 		tmp->next->m = _materias[idx];
+		tmp->next->next = NULL;
 	}
 	_materias[idx] = NULL;
 }

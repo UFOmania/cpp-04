@@ -13,7 +13,7 @@ $(NAME): $(obj)
 	c++ $(flags) -o $@ -c $<
 
 clean:
-	rm -f $(obj)
+	rm -f $(obj) $(deps)
 
 fclean: clean
 	rm -f $(NAME)

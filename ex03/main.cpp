@@ -3,9 +3,14 @@
 #include "Ice.hpp"
 #include "Cure.hpp"
 
+void f()
+{
+    system("leaks app");
+}
 
 int main()
 {
+    // atexit (f);
     // IMateriaSource* src = new MateriaSource();
     // src->learnMateria(new Ice());
     // src->learnMateria(new Cure());
@@ -28,13 +33,10 @@ int main()
     // delete src;
 
 
-	Character *c = new Character();
-	for(int i = 0; i < 1; i++)
-	{
-		c->equip(new Ice);
-		c->unequip(0);
-	}
-	delete c;
+	Character c;
+    ICharacter *d = new Character(c);
+    delete d;
+	// delete c;
 
     return 0;
 }
