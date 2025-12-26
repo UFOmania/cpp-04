@@ -19,11 +19,11 @@ int main()
 		delete i;
 	}
 	
-	
-	std::cout << "-------------------" << std::endl;
-	Animal m = Animal();
-	std::cout << "\n";
-	m.makeSound();
+	{
+		Animal *m = new Dog();
+		m->makeSound();
+		delete m;
+	}
 
 
 

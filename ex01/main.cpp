@@ -2,14 +2,9 @@
 #include "Cat.hpp"
 #include <iostream>
 
-// void foo()
-// {
-//     system("leaks Animal");
-// }
-
 int main()
 {
-    // atexit(foo);
+
     Animal *animals[10];
     for(int i = 0; i < 10; i++)
     {
@@ -32,11 +27,6 @@ int main()
 	std::cout << std::endl;
 	b = c;
 	std::cout << std::endl;
-	// {
-	// 	Cat c;
-	// 	b = c;
-	// }
 	
-
 	return 0;
 }
