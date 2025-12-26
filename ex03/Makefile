@@ -1,6 +1,6 @@
 src= AMateria.cpp Character.cpp Cure.cpp Ice.cpp MateriaSource.cpp main.cpp
 obj = $(src:.cpp=.o)
-flags = -Wall -Wextra -Werror -MMD -std=c++98 #-fsanitize=address -g3
+flags = -Wall -Wextra -Werror -MMD -std=c++98 
 deps = $(src:.cpp=.d)
 NAME= app
 
