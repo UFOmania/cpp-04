@@ -7,11 +7,11 @@ Dog::~Dog()
 }
 Dog::Dog() : Animal("Dog") 
 {
-    std::cout << "Default Dog is Constrtucted" << std::endl;
+    std::cout << "Default Dog is Constructed" << std::endl;
 }
 Dog::Dog(const Dog &other) : Animal(other)
 {
-    std::cout << "Copy Dog is Constrtucted" << std::endl;
+    std::cout << "Copy Dog is Constructed" << std::endl;
 }
 
 Dog &Dog::operator=(const Dog &other)

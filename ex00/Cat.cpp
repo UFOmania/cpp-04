@@ -7,11 +7,11 @@ Cat::~Cat()
 }
 Cat::Cat() : Animal("Cat") 
 {
-    std::cout << "Default Cat is Constrtucted" << std::endl;
+    std::cout << "Default Cat is Constructed" << std::endl;
 }
 Cat::Cat(const Cat &other) : Animal(other)
 {
-    std::cout << "Copy Cat is Constrtucted" << std::endl;
+    std::cout << "Copy Cat is Constructed" << std::endl;
 }
 
 Cat &Cat::operator=(const Cat &other)

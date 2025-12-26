@@ -15,11 +15,14 @@ Dog::Dog() : Animal("Dog")
 Dog::Dog(const Dog &other) : Animal(other)
 {
     std::cout << "Copy Dog is Constrtucted" << std::endl;
+    brain = NULL;
     *this = other;
 }
 
 Dog &Dog::operator=(const Dog &other)
 {
+    if (this == &other)
+        return *this;
     Animal::operator=(other);
     delete brain;
     brain = new Brain(*other.brain);

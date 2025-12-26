@@ -9,12 +9,13 @@ Dog::~Dog()
 }
 Dog::Dog() : Animal("Dog") 
 {
-    std::cout << "Default Dog is Constrtucted" << std::endl;
+    std::cout << "Default Dog is Constructed" << std::endl;
     brain = new Brain();
 }
 Dog::Dog(const Dog &other) : Animal(other)
 {
-    std::cout << "Copy Dog is Constrtucted" << std::endl;
+    std::cout << "Copy Dog is Constructed" << std::endl;
+    brain = NULL;
     *this = other;
 }
 

@@ -16,7 +16,7 @@ Character::~Character()
 		delete n->m;
 		delete n;
 	}
-	std::cout << i << std::endl;
+	// std::cout << i << std::endl;
 }
 
 Character::Character()
@@ -57,6 +57,7 @@ Character &Character::operator=(const Character & other)
 		if (_materias[i])
 		{
        		delete _materias[i];
+			_materias[i] = NULL;
 		}
 		if (other._materias[i])
         	_materias[i] = other._materias[i]->clone();

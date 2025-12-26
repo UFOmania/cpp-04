@@ -1,6 +1,7 @@
 #include "Animal.hpp"
 #include <iostream>
 
+
 Animal::~Animal()
 {
     std::cout << "Animal " << type << " got Destroyed" << std::endl;

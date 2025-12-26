@@ -17,13 +17,9 @@ const std::string &AMateria::getType() const
     return _type;
 }
 
-AMateria* AMateria::clone() const
-{
-	return NULL;
-}
 void AMateria::use(ICharacter& target)
 {
-	std::cout << target.getName() << "\n";
+    std::cout << "* uses " << _type << " on " << target.getName() << " *" << std::endl;
 }
 
 

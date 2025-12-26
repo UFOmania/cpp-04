@@ -3,10 +3,7 @@
 #include "Ice.hpp"
 #include "Cure.hpp"
 
-void f()
-{
-    system("leaks app");
-}
+
 
 int main()
 {
